@@ -10,6 +10,10 @@ handlerSubmit =(e) =>{
 	e.preventDefault()
     const newContact = {...this.state, id: nanoid(5)};
 	this.props.addContact(newContact);
+	this.setState({
+        name: '',
+        phone: ''
+    })
 	
 }
     handleChange = (e) =>{

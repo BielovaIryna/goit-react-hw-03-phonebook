@@ -13,7 +13,16 @@ export class App extends Component {
     {id: 'id-4', name: 'Annie Copeland', phone: '227-91-26'}],
     filter: '',
   };
-
+  componentDidMount() {
+    const stringifyContacts=localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(stringifyContacts)??[];
+    this.setState({contacts: parsedContacts});
+  }
+  componentDidUpdate(prevState){
+    if(prevState.contacts!== this.state.contacts){
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
   addContact  = (contact) => {
     const hasDuplicates = this.state.contacts.some(cont =>
 cont.name === contact.name
